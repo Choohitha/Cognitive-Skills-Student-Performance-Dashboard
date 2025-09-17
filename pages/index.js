@@ -1,4 +1,3 @@
-
 // pages/index.js
 import { useMemo, useState } from "react";
 import {
@@ -10,7 +9,7 @@ import {
 import fs from "fs";
 import path from "path";
 
-// Helper function for averages
+// Helper function to calculate averages
 function avg(arr, key) {
   if (!arr.length) return 0;
   return Math.round(arr.reduce((s, a) => s + (a[key] || 0), 0) / arr.length);
@@ -97,7 +96,7 @@ export default function Home({ students }) {
           onClick={() => setSortDir(d => d === "asc" ? "desc" : "asc")}
           className="border px-4 rounded bg-white"
         >
-          {sortDir === "asc" ? "⬆️ Asc" : "⬇️ Desc"}
+          {sortDir === "asc" ? "⬆ Asc" : "⬇ Desc"}
         </button>
       </div>
 
@@ -192,9 +191,11 @@ export default function Home({ students }) {
   );
 }
 
-// Read students.json at build time
+// ----------------------------------
+// getStaticProps to load students.json
+// ----------------------------------
 export async function getStaticProps() {
-  const filePath = path.join(process.cwd(), "student-dashboard", "data", "students.json");
+  const filePath = path.join(process.cwd(), "data", "students.json");
   const jsonData = fs.readFileSync(filePath, "utf-8");
   const students = JSON.parse(jsonData);
 
